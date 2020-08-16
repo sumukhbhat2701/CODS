@@ -1,0 +1,433 @@
+/* resetting browser stuff */
+html {
+  scroll-behavior: smooth;
+}
+
+*     {
+  box-sizing: border-box;
+}
+html,
+body   {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+/* styling our overall page */
+body     {
+  background: #FFF;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* styling our header */
+/* logo */
+#logo         {
+display: inline-block;
+color: #FFF;
+text-decoration: none;
+width: fit-content;
+
+
+}
+#logo img    {
+position: absolute;
+width: 50px;
+border-radius: 3px;
+bottom: 25px;
+
+
+}
+
+#heading  {
+position: absolute;
+color: white;
+font-size: 35px;
+line-height: 100px;
+font-weight: bold;
+width: 50px;
+left: 55px;
+
+}
+
+/* main navigation */
+nav{
+background: #222;
+color: #FFF;
+height: 100px;
+width: 100%;
+position: fixed;
+top: 0;
+
+}
+label.logo{
+color: white;
+font-size: 35px;
+line-height: 100px;
+padding: 0 100px;
+font-weight: bold;
+width: 50px;
+background-color: thistle;
+}
+nav ul{
+float: right;
+margin-right: 20px;
+}
+nav ul li{
+display: inline-block;
+line-height: 70px;
+margin: 0 5px;
+}
+nav ul li a{
+color: white;
+font-size: 17px;
+padding: 7px 13px;
+border-radius: 3px;
+text-decoration: none;
+
+}
+nav ul li a.active,nav ul li a:hover{
+background: #444;
+transition: .5s;
+}
+.checkbtn{
+font-size: 30px;
+color: white;
+float: right;
+line-height: 100px;
+margin-right: 40px;
+cursor: pointer;
+display: none;
+}
+#check{
+display: none;
+}
+@media (max-width: 952px){
+label.logo{
+  font-size: 30px;
+  padding-left: 50px;
+}
+nav ul li a{
+  font-size: 16px;
+}
+}
+@media (max-width: 858px){
+.checkbtn{
+  display: block;
+}
+ul{
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: #222;
+  top: 80px;
+  left: -100%;
+  text-align: center;
+  transition: all .5s;
+}
+nav ul li{
+  display: block;
+  margin: 50px 0;
+  line-height: 30px;
+}
+nav ul li a{
+  font-size: 20px;
+}
+nav ul li a:hover,nav ul li a.active{
+  background: none;
+  color: #444;
+}
+#check:checked ~ ul{
+  left: 0;
+}
+}
+
+/* styling our main content */
+/*stats*/
+.stats           {
+min-height: 800px;
+text-align: center;
+background-size: cover;
+}
+
+
+.stats a    {
+display: inline-block;
+color: #FFF;
+border: 3px solid #FFF;
+border-radius: 3px;
+padding: 15px 30px;
+margin-right: 20px;
+text-decoration: none;
+font-size: 28px;
+}
+.stats a:hover{
+background-color: #FFF;
+color: #1b1b1b;
+}
+
+.something a{
+display: inline-block;
+color: #FFF;
+border: 3px solid #FFF;
+border-radius: 3px;
+padding: 15px 30px;
+margin-right: 20px;
+text-decoration: none;
+font-size: 28px;
+}
+.something a:hover{
+background-color: #FFF;
+color: #1b1b1b;
+}
+
+.something{
+padding-bottom: 80px;
+}
+
+.image{
+max-width: 791px;
+max-height: 125px;
+margin: auto;
+}
+@media screen and (max-width : 800px)
+{
+.image{
+  width: 450px;
+  margin: auto;
+}
+}
+@media screen and (max-width : 460px)
+{
+.image{
+  width: 200px;
+  margin: auto;
+}
+}
+
+.container {
+z-index: 1;
+width: 70%;
+margin: 0 auto;
+  border-radius: 24px;
+  padding: 2%;
+  box-shadow: 0px 10px 6px -8px rgba(0,0,0,0.75);
+}
+.board {
+  column-count: 3;
+  column-gap: 1rem;
+}
+.container h2 {
+  margin: 0 0 30px;
+  text-align: center;
+}
+
+.card {
+  width: 84%;
+  background: #ccc;
+  padding: 8%;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  color: #fff;
+}
+
+.card.r {
+  background: #ff0053;
+  
+}
+
+.card.d {
+  background: #ffa501;
+  
+  
+}
+.card.t {
+  background: #32b336;
+}
+.card h5 {
+  margin: 0;
+  font-size: 1rem;
+}
+.card span {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+.card i {
+  font-size: 3rem;
+}
+@media screen and (max-width: 768px){
+.board {
+  column-count: 2;
+}
+.card span {
+  font-size: 2.5rem;
+}
+}
+@media screen and (max-width: 500px){
+.board {
+  column-count: 1;
+}
+}
+
+/*hero content*/
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 800px;
+  z-index: -1;;
+}
+.hero           {
+    min-height: 800px;
+    text-align: center;
+    background-size: cover;
+  }
+.hero-content   {
+  color: #FFF;
+  padding-top: 130px;
+}
+.hero-content h1   {
+  font-size: 60px;
+  margin: 0;
+}
+
+.hero-content p    {
+  font-size: 50px;
+}
+.hero-content a    {
+  display: inline-block;
+  color: #FFF;
+  border: 3px solid #023037;
+  border-radius: 3px;
+  padding: 15px 30px;
+  margin-right: 20px;
+  text-decoration: none;
+  font-size: 28px;
+}
+.hero-content a:hover{
+  background-color: #023037;
+  color: #1b1b1b;
+}  
+/*Info/Redirector*/
+* {
+box-sizing: border-box;
+}
+
+/* Create four equal columns that floats next to each other */
+.column {
+float: left;
+width: 50%;
+padding: 10px;
+color: #FFF;
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+/* tracker button 
+.tracker-button {
+  text-align: center;
+}
+#maptrack {
+  border: none;
+  color: black;
+  background-color: #6b6b6b;
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#maptrack:hover {
+  background-color: #023037; 
+  color: #fff;
+}
+
+predictor button 
+  text-align: center;
+}
+#casetrack {
+  border: none;
+  color: black;
+  background-color: #6b6b6b;
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#casetrack:hover {
+  background-color: #023037; 
+  color: #fff;
+}
+
+/* EVA button 
+.eva-button {
+  text-align: center;
+}*/
+.button {
+  border: none;
+  color: black;
+  background-color: #6b6b6b;
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #136875; 
+  color: #fff;
+}
+#EvaDiv {
+  display: none;
+  width: 300px;
+  padding: 15px 5px;
+  text-align: center;
+  background-color: #023037;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#extraDiv{
+    display: none;
+    width: 300px;
+    padding: 15px 5px;
+    text-align: center;
+    background-color: #037385;
+    color: #037385;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  
+}
+/* styling our footer */
+footer   {
+  background: #222;
+  color: #777;
+  padding: 40px;
+  text-align: center;
+}
+footer img   {
+  display: block;
+  border-radius: 5px;
+  width: 80px;
+  margin: 0 auto 10px;
+}
