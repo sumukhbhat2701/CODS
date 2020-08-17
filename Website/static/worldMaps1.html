@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" /> -->
   <title>COVID-19 TRACKER</title>
-  <link rel="stylesheet" href="./css/worldMaps.css">
+  <link rel="stylesheet" href="./css/worldMaps1.css">
   <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css">
   <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css" type="text/css">
 </head>
@@ -36,30 +36,34 @@
       </nav>
 </header>
   <br><br><br>
-  <div style="text-align: center;"><h1><em style="color:antiquewhite;font-size: 30px;">Region-Wise Clusters</em></h1></div>
+  <div style="text-align: center;"><h1><em style="color:antiquewhite;font-size: 30px;">Country-Wise Details</em></h1></div>
+  
   <div class="container" style="width:100%">
     
-    <div id="map" style='width: 90%; height: 90vh; float: left;'></div>
-    <br><br>
-
-    <div id="corona-world-details" style="float: right;margin-top: 150px;margin-left:50px;">
+    <!-- <hr>
+    <div id="corona-world-details">
     </div>
-    <!-- <div style="color:antiquewhite;font-size: 30px;">3.CountryWise Details</div><br>
-    <div id='countryMaps' style='width: 50vw; height: 50vh;'></div>
-
-    <select name="select-country">
-    </select>
-    <div id="corona-details">
+    <div style="color:antiquewhite;font-size: 30px;">2.StateWise/RegionWise Details</div><br>
+    <div id="map" style='width: 50vw; height: 50vh;'></div>
+    <br><br> -->
+    <!-- <div >3.CountryWise Details</div><br> -->
+    <div id='countryMaps' style='width: 100%; height: 90vh; float: left;'></div>
+    <div id="selectBar">
+        <select name="select-country" style="float: right;margin-top: 150px;margin-left:50px">
+          <option value="Select a Country" selected>Select a Country</option>
+        </select>
+        <div id="corona-details" style="margin-left:50px;align-content: center;text-align:center;">
+        </div>
     </div>
     
-  </div> -->
-</div>
+    
+  </div>
   <p id="demo"></p>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
   <script
     src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js"></script>
-  <script src="./script/worldMaps.js"></script>
+  <script src="./script/worldMaps1.js"></script>
 
     <!-- the footer -->
     <footer>
