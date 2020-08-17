@@ -199,8 +199,9 @@ function renderMap(){
     const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v10',
-    center: [0,20],
-    zoom: 1
+    center: [30,25],
+    zoom: 1.5,
+    dragPan: false
     });
     
     const geocoder = new MapboxGeocoder({
@@ -403,9 +404,9 @@ function renderMap(){
 async function initializeApp(){
     //console.log('initialize the app');
     setReferences();
-    doEventBindings();
+    // doEventBindings();
     NProgress.start();
-    populateLocations();
+    // populateLocations();
     await performAsyncCall();
     renderUI(coronaData.global,world =true);
     renderMap();
@@ -465,86 +466,85 @@ async function performAsyncCall(){
 
 
 function setReferences(){
-    coronaDetailsContainer = document.querySelector('#corona-details');
-    countrySelectDropdown = document.querySelector('[name="select-country"]')
+    // coronaDetailsContainer = document.querySelector('#corona-details');
+    // countrySelectDropdown = document.querySelector('[name="select-country"]')
     coronaWorldDetailsContainer = document.querySelector('#corona-world-details')
 }
 
-function doEventBindings(){
-    countrySelectDropdown.addEventListener('change',renderDetailsForSelectedLocation);
-}
+// function doEventBindings(){
+//     countrySelectDropdown.addEventListener('change',renderDetailsForSelectedLocation);
+// }
 
-function populateLocation(country,country_code){
-    const countryOption = document.createElement('option');
-    countryOption.value = country;
-    countryOption.textContent = `${country_code} - ${country}`;
-    //console.log(countryOption);
-    countrySelectDropdown.appendChild(countryOption);
-} 
+// function populateLocation(country,country_code){
+//     const countryOption = document.createElement('option');
+//     countryOption.value = country;
+//     countryOption.textContent = `${country_code} - ${country}`;
+//     //console.log(countryOption);
+//     countrySelectDropdown.appendChild(countryOption);
+// } 
 
-function populateLocations(){
-    Object.entries(countriesWithCountryCodes)
-    .forEach(([country_code,country]) => populateLocation(country,country_code))
-}
+// function populateLocations(){
+//     Object.entries(countriesWithCountryCodes)
+//     .forEach(([country_code,country]) => populateLocation(country,country_code))
+// }
 
-async function renderDetailsForSelectedLocation(event){
-    //console.log(event.target.value)
-    let countrySelected = event.target.value;
+// async function renderDetailsForSelectedLocation(event){
+//     //console.log(event.target.value)
+//     let countrySelected = event.target.value;
 
-    //countries
-    let response = await fetch('https://www.trackcorona.live/api/countries');
-    let fdata  = await response.json();
-    let {data}  = fdata;
-    locationCoronaDetails.info.push( ...data);
-    //console.log(locationCoronaDetails.locations);
-    //console.log(locationCoronaDetails.locations.length); //226 countries
+//     //countries
+//     let response = await fetch('https://www.trackcorona.live/api/countries');
+//     let fdata  = await response.json();
+//     let {data}  = fdata;
+//     locationCoronaDetails.info.push( ...data);
+//     //console.log(locationCoronaDetails.locations);
+//     //console.log(locationCoronaDetails.locations.length); //226 countries
 
-    let accumalator={
-        'country':"",
-        'country_code':"",
-        'confirmed':0,
-        "deaths":0,
-        "recovered":0,
-        "active":0
-    };
-    for(let i=0;i<Object.keys(locationCoronaDetails.info).length;i++){
-        if(locationCoronaDetails.info[i].location.toLowerCase() == countrySelected.toLowerCase()){
-            accumalator.country = locationCoronaDetails.info[i].location;
-            accumalator.confirmed = locationCoronaDetails.info[i].confirmed;
-            accumalator.deaths = locationCoronaDetails.info[i].dead;
-            accumalator.country_code = locationCoronaDetails.info[i].country_code.toUpperCase();
-            accumalator.recovered = locationCoronaDetails.info[i].recovered;
-            accumalator.active = accumalator.confirmed-accumalator.deaths-accumalator.recovered;
+//     let accumalator={
+//         'country':"",
+//         'country_code':"",
+//         'confirmed':0,
+//         "deaths":0,
+//         "recovered":0,
+//         "active":0
+//     };
+//     for(let i=0;i<Object.keys(locationCoronaDetails.info).length;i++){
+//         if(locationCoronaDetails.info[i].location.toLowerCase() == countrySelected.toLowerCase()){
+//             accumalator.country = locationCoronaDetails.info[i].location;
+//             accumalator.confirmed = locationCoronaDetails.info[i].confirmed;
+//             accumalator.deaths = locationCoronaDetails.info[i].dead;
+//             accumalator.country_code = locationCoronaDetails.info[i].country_code.toUpperCase();
+//             accumalator.recovered = locationCoronaDetails.info[i].recovered;
+//             accumalator.active = accumalator.confirmed-accumalator.deaths-accumalator.recovered;
             
-    renderUI(accumalator);
-    return(accumalator);
+//     renderUI(accumalator);
+//     return(accumalator);
     
-}}
-}
+// }}
+// }
 function renderUI(details,world=false)  {
     let html ='';
     html = `
     <table class="table">
         <thead>
-        ${world ? '<h1><strong style="color:antiquewhite;font-size: 30px;"><em>1.World Details</strong></em></h1>':`
-        <tr><u><strong><h2>${details.country}(${details.country_code})</h2></strong><u></tr>`}
+        ${'<h3 style="color:antiquewhite;font-size: 25px;text-align:center">World Details:</h3>'}
         </thead>
         <tbody>
         <tr>
             <td class="cases"><strong>Reported Cases: </strong></td>
-            <td>${world ? details[0].TotalConfirmed : details.confirmed}</td>
+            <td style="color:antiquewhite">${ details[0].TotalConfirmed}</td>
         </tr>
         <tr>
             <td class="deaths"><strong>Deaths: </strong></td> 
-            <td>${world ? details[0].TotalDeaths : details.deaths}</td>
+            <td style="color:antiquewhite">${ details[0].TotalDeaths}</td>
         </tr>
         <tr>
             <td class="recovered"><strong>Recovered: </strong></td> 
-            <td>${world ? details[0].TotalRecovered : details.recovered}</td>
+            <td style="color:antiquewhite">${ details[0].TotalRecovered}</td>
         </tr>
         <tr>
             <td class="active"><strong>Active: </strong></td> 
-            <td>${world ? details[0].TotalConfirmed-details[0].TotalDeaths-details[0].TotalRecovered : details.active}</td>
+            <td style="color:antiquewhite">${ details[0].TotalConfirmed-details[0].TotalDeaths-details[0].TotalRecovered }</td>
         </tr>
         
 
@@ -560,117 +560,117 @@ function renderUI(details,world=false)  {
 }
 
 
-function countryData(){
+// function countryData(){
     
-    var countryMaps = new mapboxgl.Map({
-        container: 'countryMaps',
-        style: 'mapbox://styles/mapbox/dark-v10',
-        zoom:1,
-        center:[0,20]
-        }); 
+//     var countryMaps = new mapboxgl.Map({
+//         container: 'countryMaps',
+//         style: 'mapbox://styles/mapbox/dark-v10',
+//         zoom:1,
+//         center:[0,20]
+//         }); 
         
     
         
-        let country;
-        let confirmedCases;
-        let deadCases;
-        let recoveredCases;
-        let lastUpdate;
-        let activeCases;
-        var lngClicked;
-        var latClicked;
-        var latitude=[], longitude=[];
+//         let country;
+//         let confirmedCases;
+//         let deadCases;
+//         let recoveredCases;
+//         let lastUpdate;
+//         let activeCases;
+//         var lngClicked;
+//         var latClicked;
+//         var latitude=[], longitude=[];
         
     
-        /*function getColor(data,activeCases){
-            if(activeCases < 100)
-            {    return "green";    }
-            else if((activeCases >= 100)&&(activeCases < 10000))
-            {   return "#BDC9E1";  }
-            else{
-                return "red";
-            }
-        }*/
-    fetch("https://www.trackcorona.live/api/countries").then(response => response.json()).then(fjson => {
-    const data = fjson.data
+//         /*function getColor(data,activeCases){
+//             if(activeCases < 100)
+//             {    return "green";    }
+//             else if((activeCases >= 100)&&(activeCases < 10000))
+//             {   return "#BDC9E1";  }
+//             else{
+//                 return "red";
+//             }
+//         }*/
+//     fetch("https://www.trackcorona.live/api/countries").then(response => response.json()).then(fjson => {
+//     const data = fjson.data
     
-    for(let i=0;i<Object.keys(data).length;i++){
+//     for(let i=0;i<Object.keys(data).length;i++){
 
-        latitude.push(Math.round(data[i].latitude));
-        longitude.push(Math.round(data[i].longitude));
-        // console.log(latitude+longitude); Checking the format
-        country=data[i].location;
-        confirmedCases=data[i].confirmed.toString();
-        deadCases=data[i].dead.toString();
-        recoveredCases=data[i].recovered.toString();
-        if(recoveredCases=='0'){
-                recoveredCases='  -'
-        }
-        lastUpdate=data[i].updated.toString();
-        if(parseInt(recoveredCases)!=0 || recoveredCases!=null)
-        {activeCases= (parseInt(confirmedCases)-parseInt(deadCases)-parseInt(recoveredCases))}
-        else{
-                return '  -';
-        }
+//         latitude.push(Math.round(data[i].latitude));
+//         longitude.push(Math.round(data[i].longitude));
+//         // console.log(latitude+longitude); Checking the format
+//         country=data[i].location;
+//         confirmedCases=data[i].confirmed.toString();
+//         deadCases=data[i].dead.toString();
+//         recoveredCases=data[i].recovered.toString();
+//         if(recoveredCases=='0'){
+//                 recoveredCases='  -'
+//         }
+//         lastUpdate=data[i].updated.toString();
+//         if(parseInt(recoveredCases)!=0 || recoveredCases!=null)
+//         {activeCases= (parseInt(confirmedCases)-parseInt(deadCases)-parseInt(recoveredCases))}
+//         else{
+//                 return '  -';
+//         }
 
-        //console.log(latitude,longitude,country,confirmedCases,deadCases,recoveredCases,lastUpdate)
+//         //console.log(latitude,longitude,country,confirmedCases,deadCases,recoveredCases,lastUpdate)
         
 
-        var popup = new mapboxgl.Popup().setHTML(`
-        <table>
-            <thead>
-                <tr><strong><em>${country}</em></strong></tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Confirmed Cases: </strong></td>
-                    <td>${confirmedCases}</td>
-                </tr>
-                <tr>
-                    <td style='color:red'><strong>Deaths: </strong></td>
-                    <td>${deadCases}</td>
-                </tr>
-                <tr>
-                    <td><strong style='color:green'>Recovered Cases: </strong></td>
-                    <td>${recoveredCases}</td>
-                </tr>
-                <tr>
-                    <td><strong>Active Cases: </strong></td>
-                    <td>${activeCases}</td>
-                </tr>
-                <tr>
-                    <td><strong>Last Update: </strong></td>
-                    <td>${lastUpdate}</td>
-                </tr>
+//         var popup = new mapboxgl.Popup().setHTML(`
+//         <table>
+//             <thead>
+//                 <tr><strong><em>${country}</em></strong></tr>
+//             </thead>
+//             <tbody>
+//                 <tr>
+//                     <td><strong>Confirmed Cases: </strong></td>
+//                     <td>${confirmedCases}</td>
+//                 </tr>
+//                 <tr>
+//                     <td style='color:red'><strong>Deaths: </strong></td>
+//                     <td>${deadCases}</td>
+//                 </tr>
+//                 <tr>
+//                     <td><strong style='color:green'>Recovered Cases: </strong></td>
+//                     <td>${recoveredCases}</td>
+//                 </tr>
+//                 <tr>
+//                     <td><strong>Active Cases: </strong></td>
+//                     <td>${activeCases}</td>
+//                 </tr>
+//                 <tr>
+//                     <td><strong>Last Update: </strong></td>
+//                     <td>${lastUpdate}</td>
+//                 </tr>
 
                 
-            </tbody>
-        </table>`
+//             </tbody>
+//         </table>`
  
-        );
+//         );
         
-        var marker = new mapboxgl.Marker({
-            color: "#BDC9E1",
-            scale:0.3
-        })
-        .setLngLat([ longitude[i],latitude[i]])
-        .addTo(countryMaps)
-        .setPopup(popup);
-    };
+//         var marker = new mapboxgl.Marker({
+//             color: "#BDC9E1",
+//             scale:0.3
+//         })
+//         .setLngLat([ longitude[i],latitude[i]])
+//         .addTo(countryMaps)
+//         .setPopup(popup);
+//     };
     
 
-    countryMaps.on('click', function(e) {
-        /*lngClicked = (Number(Math.round(e.lngLat.lng)));
-        latClicked = (Number(Math.round(e.lngLat.lat)));
-        if (latitude.includes(latClicked) && longitude.includes(lngClicked)) console.log(true+"LOL");
-        else console.log(lngClicked+' '+latClicked);
-        // if($("#popup").length) console.log("AGAIN TRUE LOL"); // thinking about using the popup id which comes from the popup function*/
+//     countryMaps.on('click', function(e) {
+//         /*lngClicked = (Number(Math.round(e.lngLat.lng)));
+//         latClicked = (Number(Math.round(e.lngLat.lat)));
+//         if (latitude.includes(latClicked) && longitude.includes(lngClicked)) console.log(true+"LOL");
+//         else console.log(lngClicked+' '+latClicked);
+//         // if($("#popup").length) console.log("AGAIN TRUE LOL"); // thinking about using the popup id which comes from the popup function*/
 
-        countryMaps.flyTo({center: {lng:e.lngLat.lng,lat:e.lngLat.lat}, zoom:2});
+//         countryMaps.flyTo({center: {lng:e.lngLat.lng,lat:e.lngLat.lat}, zoom:2});
         
-    });
-    });
-}
+//     });
+//     });
+// }
 
 /*function stateData(){
     fetch("https://www.trackcorona.live/api/provinces").then(response => response.json()).then(fjson => {
@@ -764,7 +764,7 @@ function cityData(){
 
 
 clusterMaps();
-countryData();
+// countryData();
 
 
 

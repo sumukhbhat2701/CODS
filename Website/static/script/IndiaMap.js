@@ -434,7 +434,7 @@ function openNav(state, stateFlag = false) {
                 document.getElementById("mySidenav").appendChild(divSide);
                 divSide.style.color = "white";
                 divSide.innerHTML +=
-                    "<p><h1><center>India</center></h1><br><span style='color: orange;'>Total Confirmed Cases: " + indiaData.totalconfirmed + "</span><br><span style='color: green;'>Total Recovered Cases: " + indiaData.totalrecovered + "</span><br><span style='color: red;'>Total Deceased Cases: " + indiaData.totaldeceased +
+                    "<p><h1><center>India</center></h1><br><span style='color: orange;text-align:center;padding-left:100px;'>Total Confirmed Cases: " + indiaData.totalconfirmed + "</span><br><br><span style='color: green;text-align:center;padding-left:100px;'>Total Recovered Cases: " + indiaData.totalrecovered + "</span><br><br><span style='color: red;padding-left:100px;'>Total Deceased Cases: " + indiaData.totaldeceased +
                     "</span></p>";
 
                 fetch("https://api.rootnet.in/covid19-in/stats/latest").then(response => response.json()).then(ldata => {
@@ -700,7 +700,7 @@ function openNav(state, stateFlag = false) {
                 divID1.style.color = "white";
                 divID1.style.textAlign = "center";
                 document.getElementById("mySidenav").appendChild(divID1);
-                document.getElementById("tester1").innerHTML = `<b style="font-size: 20px; font-family: 'Courier New', Courier, monospace;">${state}</b>`;
+                document.getElementById("tester1").innerHTML = `<br><b style="font-size: 20px; font-family: 'Courier New', Courier, monospace;">${state}</b>`;
 
 
                 var divID = document.createElement('div');
@@ -718,6 +718,7 @@ function openNav(state, stateFlag = false) {
                 divID2.style.width = "100%";
                 divID2.style.height = "40%";
                 divID2.style.marginTop = "100px";
+                divID2.style.marginBottom = "450px";
                 document.getElementById("mySidenav").appendChild(divID2);
 
                 plotDaily(dates, confirmedDaily[stateCode[state]], deceasedDaily[stateCode[state]], recoveredDaily[stateCode[state]], divID2, states[stateCode[state]]);
