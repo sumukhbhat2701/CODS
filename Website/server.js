@@ -75,6 +75,10 @@ app.get("/worldMap",(req,res)=>{
     res.sendFile(path.join(__dirname,'static','worldMaps.html'));
 })
 
+app.get("/worldMap1",(req,res)=>{
+    res.sendFile(path.join(__dirname,'static','worldMaps1.html'));
+})
+
 app.get("/IndiaMap",(req,res)=>{
     res.sendFile(path.join(__dirname,'static','IndiaMap.html'));
 })
