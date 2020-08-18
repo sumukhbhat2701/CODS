@@ -1,86 +1,121 @@
+const csv = require('csv-parser');
 const express = require('express');
 const fs = require('fs');
 const app = express();
 const path = require('path');
-const spawn = require("child_process").spawn; 
+const spawn = require("child_process").spawn;
 const bodyParser = require('body-parser');
 
-app.set('view engine','ejs') 
+const results = [];
+const topNews = [],
+    localNews = [],
+    economicImpact = [],
+    scienceResearch = [],
+    travelImpact = [];
+
+app.set('view engine', 'ejs')
 
 app.use(express.static(__dirname + '/views'));
 app.use(express.static(__dirname + '/static/map'));
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/static'));
 
-app.get('/',(req,res)=>{
-	res.sendFile(path.join(__dirname,'static','lander.html'));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'lander.html'));
 });
 
-app.post('/evaChatbot',(req,res)=>{
-    res.sendFile(path.join(__dirname,'static','lander.html'));
-})
-
-app.get('/evaChatbot',(req,res)=>{
-    res.sendFile(path.join(__dirname,'static','lander.html'));
-})
-
-app.post('/newsAndTweets',(req,res)=>{
-    res.sendFile(path.join(__dirname,'static','news.html'));
-})
-
-app.get('/newsAndTweets',(req,res)=>{
-    res.sendFile(path.join(__dirname,'static','news.html'));
+app.post('/evaChatbot', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'lander.html'));
 })
 
 let predictions;
-app.post('/preditionsModel',(req,res)=>{
-    res.render('index',{data:{prediction1:null}});
+app.post('/preditionsModel', (req, res) => {
+    res.render('index', { data: { prediction1: null } });
 })
 
-app.get('/preditionsModel',(req,res)=>{
-    res.render('index',{data:{prediction1:null}});
+app.get('/preditionsModel', (req, res) => {
+    res.render('index', { data: { prediction1: null } });
 })
- 
-app.post('/predictions', (req, res) =>{ 
+app.get('/newsAndTweets', (req, res) => {
+    fs.createReadStream('./Tweets/All-Tweets.csv')
+        .pipe(csv())
+        .on('data', (data) => results.push(data))
+        .on('end', () => {
+            fs.createReadStream('./Tweets/Top News.csv')
+                .pipe(csv())
+                .on('data', (data) => topNews.push(data))
+                .on('end', () => {
+                    fs.createReadStream('./Tweets/Local newsSuggested locations.csv')
+                        .pipe(csv())
+                        .on('data', (data) => localNews.push(data))
+                        .on('end', () => {
 
-    const yyyy= req.body.name.split('-')[0];
+                            fs.createReadStream('./Tweets/Economic Impact.csv')
+                                .pipe(csv())
+                                .on('data', (data) => economicImpact.push(data))
+                                .on('end', () => {
+
+                                    fs.createReadStream('./Tweets/Science and Research.csv')
+                                        .pipe(csv())
+                                        .on('data', (data) => scienceResearch.push(data))
+                                        .on('end', () => {
+
+
+                                            fs.createReadStream('./Tweets/Travel Impact.csv')
+                                                .pipe(csv())
+                                                .on('data', (data) => travelImpact.push(data))
+                                                .on('end', () => {
+                                                    res.render("newsTweets", { tweets: results, topNews: topNews, localNews: localNews, economicImpact: economicImpact, scienceResearch: scienceResearch, travelImpact: travelImpact })
+                                                });
+
+                                        });
+                                });
+
+                        });
+                });
+        });
+})
+app.post('/predictions', (req, res) => {
+
+    const yyyy = req.body.name.split('-')[0];
     const mm = req.body.name.split('-')[1];
     const dd = req.body.name.split('-')[2]
-    const process = spawn('python',["./sirModel.py", 
-                            parseInt(yyyy),parseInt(mm),parseInt(dd)] ); 
-  
-    process.stdout.on('data', function(data) { 
+    const process = spawn('python', ["./sirModel.py",
+        parseInt(yyyy), parseInt(mm), parseInt(dd)
+    ]);
+
+    process.stdout.on('data', function(data) {
         predictions = data.toString().split("##########");
         res.redirect('/output')
-    } ) 
-} ); 
-  
-app.get('/output',(req,res)=>{
-    res.render('index',{data:{prediction1:predictions[0],prediction2:predictions[1],prediction3:predictions[2]}});
+    })
 });
 
-app.get('/maps',(req,res)=>{
-    res.sendFile(path.join(__dirname,'static','map.html'));
+app.get('/output', (req, res) => {
+    res.render('index', { data: { prediction1: predictions[0], prediction2: predictions[1], prediction3: predictions[2] } });
+});
+
+app.get('/maps', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'map.html'));
 })
 
-app.post('/maps',(req,res)=>{
-    res.sendFile(path.join(__dirname,'static','map.html'));
+app.post('/maps', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'map.html'));
 })
 
-app.get("/about",(req,res)=>{
-    res.sendFile(path.join(__dirname,'static','about.html'));
+app.get("/about", (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'about.html'));
 })
 
-app.get("/worldMap",(req,res)=>{
-    res.sendFile(path.join(__dirname,'static','worldMaps.html'));
+app.get("/worldMap", (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'worldMaps.html'));
 })
 
-app.get("/worldMap1",(req,res)=>{
-    res.sendFile(path.join(__dirname,'static','worldMaps1.html'));
+app.get("/worldMap1", (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'worldMaps1.html'));
 })
 
-app.get("/IndiaMap",(req,res)=>{
-    res.sendFile(path.join(__dirname,'static','IndiaMap.html'));
+app.get("/IndiaMap", (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'IndiaMap.html'));
 })
 
-app.listen(3000,()=>console.log("Listening at port 3000...."));
+app.listen(3000, () => console.log("Listening at port 3000...."));
