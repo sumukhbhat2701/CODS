@@ -21,34 +21,12 @@ let activeList = [];
 let ccList = [];
 let dcList = [];
 let rcList = [];
-// map.getContainer().addEventListener('mouseover', function () {
-//         map.dragging.disable();
-//     });
 
-// map.getContainer().addEventListener('mouseout', function () {
-//         map.dragging.enable();
-//     });
 
 map.on('doubleclick', function(e) {
     map.panTo(e.latlng);
 });
-// map.on('click', function(e) {
-//   closeNav();
-//   // console.log(e.target.getBounds());
-//   // var i;
-//   // northEast = e.target.getBounds()._northEast;
-//   // southWest = e.target.getBounds()._southWest;
-//   // console.log(northEast.lat,northEast.lng);
-//   // console.log(southWest.lat,southWest.lng);
 
-//   // if((northEast.lat >= 35.75097043944928-1 && northEast.lat <= 35.75097043944928 + 1) && northEast.lng == 79.70031738281251 && southWest.lat == 32.01273389791075 && southWest.lng == 73.62487792968751)
-//   // {
-//   //  i=13
-//   //  console.log(true);
-//   // }
-
-//   openNav(i);
-// });
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWRpbWVodGEiLCJhIjoiY2tjZ3F4d2JjMGkwOTM0cXFmZjc4enVpNSJ9.-g8OjRs_-7w7nIAqNUQ90w', {
     maxZoom: 18,
@@ -353,88 +331,19 @@ function openNav(state, stateFlag = false) {
     document.getElementById("mySidenav").style.opacity = "1";
     document.getElementById("hover-details").style.visibility = 'hidden';
     try {
-        //document.getElementById("mySidenav").innerHTML = '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><strong><font color = white><b>State  : '+statesData.features[i].properties.loc+"</font></strong> <br><strong><b><font color = orange>Total Confirmed Cases : "+statesData.features[i].properties.totalConfirmedCase+"</font></striong><br><strong><font color= red>Deaths : "+statesData.features[i].properties.deaths+"</font></striong><br><strong><font color=green>Recovered : "+statesData.features[i].properties.recovered+"</font></striong><br><strong><b><font color=blue>Active Cases : "+statesData.features[i].properties.activeCases+"</font></striong>";
-
         if (stateFlag == false) {
             document.getElementById("mySidenav").innerHTML = '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>';
 
             fetch("https://api.covid19india.org/data.json").then(response => response.json()).then(ldata => {
-                // console.log(ldata.cases_time_series[182]);
+
                 var indiaData = ldata.cases_time_series[Object.keys(ldata.cases_time_series).length - 1]
-                    // console.log(indiaData);
-                    // var trace1 = {
-                    //     x: [Number(indiaData.totalconfirmed)],
-                    //     y: indiaData.date,
-                    //     type: 'bar',
-                    //     name: 'Total Confirmed Cases',
-                    //     marker: { color: "orange", opacity: 0.8 },
-                    //     orientation: "h"
-                    // };
-
-                // var trace2 = {
-                //     x: [Number(indiaData.totalrecovered)],
-                //     y: indiaData.date,
-                //     type: 'bar',
-                //     name: 'Recovered',
-                //     marker: { color: "green", opacity: 0.8 },
-                //     orientation: "h"
-                // };
-                // var trace4 = {
-                //     x: [Number(indiaData.totaldeceased)],
-                //     y: indiaData.date,
-                //     type: 'bar',
-                //     name: 'Deaths',
-                //     marker: { color: "red", opacity: 0.8 },
-                //     orientation: "h"
-                // };
-
-                // var data = [trace2, trace4, trace1];
-
-                // var layout = {
-                //     title: "<b>India</b>",
-                //     font: {
-                //         family: 'Courier New, monospace',
-                //         size: 18,
-                //         color: '#fff',
-                //         align: 'center'
-                //     },
-                //     autosize: false,
-                //     width: 400,
-                //     height: 200,
-                //     margin: {
-                //         l: 100,
-                //         r: 100,
-                //         pad: 4
-                //     },
-                //     barmode: "stack",
-                //     showlegend: false,
-                //     plot_bgcolor: "#111",
-                //     paper_bgcolor: "#111",
-                //     xaxis: {
-                //         showticklabels: false,
-                //         linecolor: 'grey',
-                //         linewidth: 2,
-                //         mirror: true
-                //     },
-                //     yaxis: {
-                //         automargin: false,
-                //         showticklabels: false,
-                //         linecolor: 'grey',
-                //         linewidth: 2,
-                //         mirror: true
-                //     }
-
-                // };
-
-                // document.getElementById("mySidenav").style.marginBottom = "-20px";
-                // Plotly.newPlot("mySidenav", data, layout, { displayModeBar: false });
 
                 var divSide = document.createElement('div');
                 divSide.setAttribute('id', "indiaStats")
                 document.getElementById("mySidenav").appendChild(divSide);
                 divSide.style.color = "white";
                 divSide.innerHTML +=
-                    "<p><h1><center>India</center></h1><br><span style='color: orange;text-align:center;padding-left:100px;'>Total Confirmed Cases: " + indiaData.totalconfirmed + "</span><br><br><span style='color: green;text-align:center;padding-left:100px;'>Total Recovered Cases: " + indiaData.totalrecovered + "</span><br><br><span style='color: red;padding-left:100px;'>Total Deceased Cases: " + indiaData.totaldeceased +
+                    "<p><h1><center>India</center></h1><br><span style='color: orange;text-align:center;padding-left:40px;'>Total Confirmed Cases: " + indiaData.totalconfirmed + "</span><br><br><span style='color: green;text-align:center;padding-left:40px;'>Total Recovered Cases: " + indiaData.totalrecovered + "</span><br><br><span style='color: red;padding-left:40px;'>Total Deceased Cases: " + indiaData.totaldeceased +
                     "</span></p>";
 
                 fetch("https://api.rootnet.in/covid19-in/stats/latest").then(response => response.json()).then(ldata => {
@@ -767,11 +676,13 @@ function openNav(state, stateFlag = false) {
                     paper_bgcolor: "#111",
                     grid: { rows: 1, columns: 2 },
                     xaxis: {
-                        showticklabels: true,
+                        title: 'Dates',
+                        showticklabels: false,
                         linecolor: '#fff',
                         linewidth: 2
                     },
                     yaxis: {
+                        title: 'No Of Cases',
                         linecolor: '#fff',
                         linewidth: 2
                     }
@@ -831,6 +742,7 @@ function openNav(state, stateFlag = false) {
                     grid: { rows: 1, columns: 2 },
                     barmode: "stack",
                     xaxis: {
+                        title: 'Dates',
                         type: "category",
                         showticklabels: false,
                         mirror: 'ticks',

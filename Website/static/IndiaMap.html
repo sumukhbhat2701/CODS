@@ -21,37 +21,12 @@
 
 </head>
 
-<body style="background-color: rgb(26, 24, 24);">
-    <!-- the header -->
-    <header id="navbar">
-
-        <!-- our main logo -->
-        <nav>
-            <a id="logo" href="/">
-                <img src="img/corona.png" alt="Logo">
-                
-            </a> 
-            <span id="heading">CODS</span>
-            <input type="checkbox" id="check">
-            <label for="check" class="checkbtn">
-              <i class="fas fa-bars"></i>
-            </label>
-            <ul>
-                <li><a href="/maps">COVID-19 Tracker</a></li>
-                <li><a href="/preditionsModel">Predictor</a></li>
-                <li><a href="/evaChatbot">EVA</a></li>
-                <li><a href="newsAndTweets">News and Tweets</a></li>
-                <li><a href="/about">About</a></li>
-            </ul>
-          </nav>
-    </header>
-    <br><br><br><br><br>   
-    <div id="container" style="padding-top: 10px;">
-        <div id="map" style="height:95%"></div>
+<body>
+    <div id="container">
+        <div id="map"></div>
         <br><br><br><br><br><br><br><br><br>
         <div id="legend1" style="display: inline-block"></div>
     </div>
-
     <div id="filterButton">
         <div id="tccButton"><span>Total Confirmed Cases</span></div>
 
@@ -68,7 +43,7 @@
 
 
     </div>
-    <div id="mySidenav" class="sidenav" style="padding-top: 50px;margin-top: 50px;">
+    <div id="mySidenav" class="sidenav">
     </div>
     <!-- <div id="on-load" onload="javascript:hideIntro()">
     <h1>ESC - Recenter the Map.<br>Double Tap anywhere on the map to zoom to that point.</h1>
@@ -82,10 +57,10 @@
     <script src="./assets_IndianMap/Indian_States.js"></script>
     <script src="./script/IndiaMap.js"></script>
 
-      <!-- the footer -->
+    <!-- the footer -->
     <footer>
         <span>Center of Data Science, PES University 2020</span>
-    <!-- Include all the libraries, languages and frameworks used to build the website -->  
+        <!-- Include all the libraries, languages and frameworks used to build the website -->
     </footer>
 
 </body>

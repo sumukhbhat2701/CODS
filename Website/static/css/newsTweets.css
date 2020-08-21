@@ -1,8 +1,186 @@
+@import url('https://fonts.googleapis.com/css?family=Karla');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Noto Sans JP');
+html {
+    scroll-behavior: smooth;
+}
+
 * {
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
     color: honeydew;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Noto Sans JP';
+}
+
+body {
+    background-color: #023037;
+}
+
+
+/* logo */
+
+#logo {
+    display: inline-block;
+    color: #FFF;
+    text-decoration: none;
+    width: fit-content;
+}
+
+#logo img {
+    position: absolute;
+    width: 50px;
+    border-radius: 3px;
+    bottom: 25px;
+    z-index: 1;
+}
+
+#heading {
+    position: absolute;
+    color: white;
+    font-size: 35px;
+    line-height: 100px;
+    font-family: 'Montserrat';
+    font-weight: bold;
+    width: 50px;
+    left: 55px;
+    z-index: 1;
+}
+
+
+/* main navigation */
+
+nav {
+    background: #222;
+    color: #FFF;
+    height: 100px;
+    width: 100%;
+    font-family: 'Montserrat';
+    position: fixed;
+    top: 0;
+}
+
+label.logo {
+    color: white;
+    font-size: 35px;
+    line-height: 100px;
+    padding: 0 100px;
+    font-weight: bold;
+    width: 50px;
+    background-color: thistle;
+}
+
+nav ul {
+    float: right;
+    margin-right: 20px;
+    margin-top: 16px;
+    font-family: 'Montserrat';
+}
+
+nav ul li {
+    display: inline-block;
+    line-height: 70px;
+    margin: 0 5px;
+    font-family: 'Montserrat';
+}
+
+nav ul li a {
+    color: white;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    font-family: 'Montserrat';
+    text-decoration: none;
+}
+
+nav ul li a.active,
+nav ul li a:hover {
+    background: #444;
+    transition: .5s;
+}
+
+.checkbtn {
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 100px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+
+#check {
+    display: none;
+}
+
+@media (max-width: 952px) {
+    label.logo {
+        font-size: 30px;
+        padding-left: 50px;
+    }
+    nav ul li a {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 858px) {
+    .checkbtn {
+        display: block;
+    }
+    ul {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #222;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+    nav ul li {
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+        position: absolute;
+        top: 30px;
+    }
+    nav ul li a {
+        font-size: 20px;
+    }
+    nav ul li a:hover,
+    nav ul li a.active {
+        background: none;
+        color: #444;
+    }
+    #check:checked~ul {
+        left: 0;
+    }
+}
+
+
+/* styling our footer */
+
+footer {
+    background: #222;
+    color: #777;
+    padding: 50px;
+    text-align: center;
+    width: 100%;
+}
+
+footer img {
+    display: block;
+    border-radius: 5px;
+    width: 80px;
+    margin: 0 auto 10px;
+}
+
+.title {
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+    margin-top: 5%;
+    font-family: 'Karla';
 }
 
 ::-webkit-scrollbar {
@@ -32,13 +210,8 @@ li {
     box-shadow: inset 0 12px 12px -12px rgba(105, 101, 101, 0.5);
 }
 
-a {
+#containerNews a {
     text-decoration: none;
-    color: rgb(24, 148, 197);
-}
-
-a:visited {
-    color: rgb(24, 148, 197);
 }
 
 #header {
