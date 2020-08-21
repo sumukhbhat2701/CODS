@@ -4,11 +4,12 @@ const app = express()
 const port = 3000
 app.get('/', (req, res) => {
 
-    const python = spawn('python', ['script1.py']);
-    const python1 = spawn('python', ['script2.py']);
+    const python = spawn('python', ['./Tweets/script1.py']);
+    const python1 = spawn('python', ['./Tweets/script2.py']);
 
     python.stdout.on('data', function(data) {
         console.log('Pipe data from python script ...');
+        res.send("CHECK")
     });
 
     python.on('close', (code) => {

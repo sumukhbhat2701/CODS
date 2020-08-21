@@ -1,28 +1,32 @@
 # coding: utf-8
 
 import tweepy
-import json
 import pandas as pd
 from langdetect import detect
 from datetime import datetime 
 from datetime import timedelta
+from dotenv import load_dotenv
+from pathlib import Path  # Python 3.6+ only
+env_path = Path('../.env') 
+load_dotenv(dotenv_path=env_path)
+import os
 
-consumer_key = "cFf7im7BH68xO9qh3zEsv3nFz"
-consumer_secret = "2QyodEVK63XYE5D9RFPAo0I53rhBOsNocQGpGB8rapmEqxDnJi"
-access_key = "1265319352795975680-EJBIU55ZHZnjn8svR420cqVuU9evRL"
-access_secret = "i8h2utF6b2l2Uh7Vpg6c2mnPOO1CuthGdbyWtHSWdIURP"
+consumer_key = os.getenv("CONSUMER_KEY")
+consumer_secret = os.getenv("CONSUMER_SECRET")
+access_key = os.getenv("ACCESS_KEY")
+access_secret = os.getenv("ACCESS_SECRET")
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret) 
 auth.set_access_token(access_key, access_secret) 
 api = tweepy.API(auth) 
 
-screenname = ["narendramodi","bogochisaac","SueDHellmann","DrTomFrieden","DrTedros","ScottGottliebMD","T_Inglesby","ashishkjha","COVIDNewsByMIB"]
+screenname = ["narendramodi","WHO","CDCgov","COVID19CA","CovidIndiaSeva","UK COVID-19","COVID19_USA_","ashishkjha","COVIDNewsByMIB","MoHFW_INDIA"]
 
 tweet,tweets_dates,text_query,hyperlinks,screennames_twitter = [], [], ["CORONA","COVID"], [], []
 
 count = 0
 for i in screenname:
-    tweets = api.user_timeline(screen_name=i,count=100,tweet_mode="extended")  
+    tweets = api.user_timeline(screen_name=i,count=10,tweet_mode="extended")  
     for status in tweets:
         for text in text_query:
             if text in status.full_text and detect(status.full_text)=="en" and "RT" not in status.full_text:
@@ -50,5 +54,6 @@ for i in range(len(tweet)):
 df = pd.DataFrame({"Screen Name":screennames_twitter,"Tweets":tweet,"Timeframe":tweets_dates,"Links":hyperlinks})
 df.to_csv('All-Tweets.csv',index=False)   
 df.sort_values(by=['Timeframe'], inplace=True, ascending=False)
+df = df[df["Links"] != '#']
 df = df.reset_index(drop=True)
 df

@@ -27,7 +27,7 @@ for i in mainDivs:
             refs = j.find_all('a',{'class':'wEwyrc AVN2gc uQIVzc Sksgp'})
             time = j.find_all('time')           
             for k,l,m,n in zip(headlines,refs,time,a):
-                news = k.text+'\nReference: '+l.text+'\nUpdated: '+m.text+'\n',' For more: https://news.google.com/'+n['href'][2:]
+                news = k.text+'\nReference: '+l.text+'\nUpdated: '+m.text+'\n','https://news.google.com/'+n['href'][2:]
                 if(h.text == 'Top news'):
                     topNews.append(news)
                 if(h.text == 'Local newsSuggested locations'):
