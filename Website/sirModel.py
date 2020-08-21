@@ -45,7 +45,7 @@ def get_beta(recovery_period_in_days):
     susceptible --> infectious
     '''
     #At the time of coding this program,basic reproduction number for COVID-19 in India.Calculated using I= I(0)*exp[gamma * (R0-1)*t] considering N/S approximately equals 1
-    R0 = 1.568769846974838 
+    R0 = 1.571869846974838 
     return R0*(1/recovery_period_in_days)  #avg_num_contacts_per_person * proba_of_disease_transm    #R0 * gamma , gamma = 1/recovery_period in days
 
 
@@ -142,7 +142,7 @@ if __name__ == "__main__":
     initial_removed = 0
 
     # parameter to build avg recovery rate (gamma)
-    recovery_period_in_days = 9
+    recovery_period_in_days = 10
 
 
 
@@ -152,7 +152,7 @@ if __name__ == "__main__":
     predictions = {'date':[],'S':[],'I':[],'R':[]} 
     predictions1 = {} # {I(t) : date}
     predictions2 = {} # {date : I(t)}
-    for i in range(0,420):
+    for i in range(0,600):
         S,I,R = model(total_population, days, initial_infected, recovery_period_in_days)
         predictions1[round(I)] = date.today()+timedelta(i)
         predictions2[date.today()+timedelta(i)] = round(I)
@@ -162,6 +162,7 @@ if __name__ == "__main__":
         predictions['R'].append(round(R))
         days+=1
 
+    # dateInput = date.today()
     dateInput = date(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]))
 
     if(int(sys.argv[1])>=date.today().year and int(sys.argv[2])>=date.today().month and int(sys.argv[3])>=date.today().day):
@@ -172,4 +173,10 @@ if __name__ == "__main__":
         print("Please re-enter a date of the future!##########")
         print('COVID-19 peak in India expected on: {},with: {} million confirmed cases##########'.format(predictions1[round(max(predictions['I']))],max(predictions['I'])/1000000))
         
-    
+    # print(predictions1[round(max(predictions['I']))])
+    # import pandas as pd
+    # df = pd.DataFrame(predictions)
+    # df.to_csv('predictions.csv')
+
+    # print('COVID-19 peak in India expected on: {},with: {} million confirmed cases##########'.format(predictions1[round(max(predictions['I']))],max(predictions['I'])/1000000))
+    # print("Number of infected cases on {} is {}##########".format(dateInput,int(predictions2[dateInput])))
