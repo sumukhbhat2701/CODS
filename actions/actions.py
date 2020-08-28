@@ -40,9 +40,9 @@ import time
 pwd = os.getcwd() 
 
 logger = logging.getLogger(__name__)
-loaded_model = load_model(pwd+'\emotionClassifierBoth.h5')
+loaded_model = load_model(pwd+'/emotionClassifierBoth.h5')
 
-f = open(pwd+'\TokenizerBoth.pkl','rb')
+f = open(pwd+'/TokenizerBoth.pkl','rb')
 tokenizer = pickle.load(f)
 f.close()
 
