@@ -1,3 +1,5 @@
+if(screen.width <= 1200) document.getElementById("message").innerHTML = "<h4 style='color:purple;text-align:center'>Please open on a desktop device!"
+else{
 fetch('https://api.covid19api.com/summary').then((response) => {return response.json();})
 .then((data) => {
     const {Global} = data;
@@ -66,3 +68,4 @@ function myFunction() {
 		})
 	});
 })();
+}
