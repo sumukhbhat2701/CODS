@@ -4,7 +4,7 @@ FROM rasa/rasa-sdk:latest
  # back to the `root` user if you want to install additional dependencies'
 WORKDIR /app
 
-COPY ./actions /app/actions
+COPY . /app/actions
 
 USER root
 
