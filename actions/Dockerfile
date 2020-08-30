@@ -10,5 +10,8 @@ RUN pip3 install actions && pip3 install google && pip3 install typing==3.7.4.3 
 # Switch back to a non-root user
 USER 1001
 
+VOLUME ["/app/actions"]
+
 EXPOSE 5055
-CMD [ "rasa","run","actions" ]
+
+CMD ["start", "--actions", "actions.actions"]
