@@ -14,7 +14,8 @@
 FROM node:12
 
 # Create app directory
-WORKDIR /usr/src/app/Website
+WORKDIR /app/Website
+COPY . /app/Website
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
