@@ -1,3 +1,5 @@
 1)add in docker-config.yml under rasa server -> 
 volume:
 - ./EVA:/app/EVA
+2)refer to the dockerfile reference in: https://hub.docker.com/r/rasa/rasa-sdk/dockerfile
+3)refer to https://github.com/RasaHQ/rasa-sdk
