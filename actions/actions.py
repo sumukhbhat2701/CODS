@@ -25,10 +25,11 @@ from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.layers import Dropout
 import re
 import nltk
-from nltk.corpus import stopwords
+# from nltk.corpus import stopwords
 from nltk import word_tokenize
 from nltk.stem import WordNetLemmatizer 
-STOPWORDS = set(stopwords.words('english'))
+# STOPWORDS = set(stopwords.words('english'))
+STOPWORDS = {'themselves', 'no', 'hers', "wouldn't", 'ourselves', 'which', 'all', 'a', 'himself', "mustn't", 'most', 'm', 'can', 'until', 'nor', 'on', 'why', 'off', 'each', 'couldn', 'hadn', 'who', 'yours', 'where', 'out', 'him', 'doesn', 'theirs', "don't", "isn't", 'needn', 'while', "hasn't", 'weren', 'aren', 'that', 'under', "aren't", 've', 'only', 'when', "you've", 'wasn', 'has', 'being', 'if', "shouldn't", 'd', "you'd", 'those', 'here', 'had', 'same', 'very', 'into', 'through', 'her', 'as', 'now', "shan't", 'your', 'more', "wasn't", 'than', "needn't", 'before', 'such', 'below', 'mustn', 'between', 'don', 'he', 'is', 'again', 'been', 'did', 'to', "weren't", 'against', 'but', 'own', 'herself', "didn't", 'we', 'wouldn', 'how', 'an', "doesn't", 'shouldn', 'will', 'any', 're', 'or', 'isn', 'be', 'shan', "you'll", 'doing', 'for', 'and', 'am', 'once', 'does', 'do', 'too', 'hasn', 'the', 'just', 'above', 'some', 'from', 'y', 'itself', 'up', 'having', 'of', 'are', 'she', "couldn't", 'our', 'both', 'you', 'these', "mightn't", 's', 'over', 'mightn', 'by', 't', 'at', 'them', 'there', 'yourselves', 'have', 'with', 'myself', 'further', 'haven', 'his', 'after', "won't", 'yourself', "should've", 'during', 'o', 'didn', "hadn't", 'whom', "she's", 'they', 'about', "it's", 'was', 'ain', 'my', 'its', 'so', 'because', 'i', 'then', 'in', "haven't", 'their', 'ours', 'this', 'few', 'not', 'down', 'me', 'should', 'll', 'won', 'it', 'other', 'ma', "you're", "that'll", 'what', 'were'}
 from tensorflow.keras.models import load_model
 import pickle
 import os
@@ -40,9 +41,9 @@ import time
 pwd = os.getcwd() 
 
 logger = logging.getLogger(__name__)
-loaded_model = load_model(pwd+'/emotionClassifierBoth.h5')
+loaded_model = load_model('emotionClassifierBoth.h5')
 
-f = open(pwd+'/TokenizerBoth.pkl','rb')
+f = open('TokenizerBoth.pkl','rb')
 tokenizer = pickle.load(f)
 f.close()
 
