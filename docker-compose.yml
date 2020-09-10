@@ -15,6 +15,8 @@ services:
       container_name: "rasa_server"
       build: 
         context: EVA
+      volumes:
+        - ./EVA:/app/EVA
       ports: 
         - "5005:5005"
     action_server:
@@ -29,5 +31,7 @@ services:
       container_name: "chatbot_ui"
       build: 
         context: Website
+      volumes:
+        - ./Website:/app/Website
       ports: 
         - "3000:3000"
