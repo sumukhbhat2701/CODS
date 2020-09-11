@@ -14,12 +14,13 @@
 FROM node:12
 
 # Create app directory
-WORKDIR /app/Website
+WORKDIR /app
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 COPY package*.json /app/Website/
+COPY package*.json /app
 
 RUN npm install
 # If you are building your code for production
@@ -27,6 +28,7 @@ RUN npm install
 
 # Bundle app source
 COPY . /app/Website/
+COPY . /app
 
 VOLUME /app/Website
 
